@@ -219,10 +219,11 @@ export default function Index() {
           onClick={() => scrollToSection(0)}
           className="flex items-center gap-2 transition-transform hover:scale-105"
         >
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-foreground/15 backdrop-blur-md transition-all duration-300 hover:scale-110 hover:bg-foreground/25">
-            <span className="font-sans text-xl font-bold text-foreground">T</span>
-          </div>
-          <span className="font-sans text-xl font-semibold tracking-tight text-foreground">TARGET PROM GLOBAL</span>
+          <img
+            src="https://cdn.poehali.dev/projects/6aa484ae-9e0d-4763-b9e2-55d4013903e4/bucket/ca8a04ed-1f9a-45ac-b06a-e4815d5b85ae.png"
+            alt="TARGET PROM GLOBAL"
+            className="h-12 w-auto object-contain drop-shadow-lg"
+          />
         </button>
 
         <div className="hidden items-center gap-8 md:flex">
