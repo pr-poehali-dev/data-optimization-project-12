@@ -176,6 +176,10 @@ export default function Index() {
             alt="TARGET PROM GLOBAL"
             className="h-12 w-auto object-contain drop-shadow-lg"
           />
+          <div className="hidden flex-col leading-tight md:flex">
+            <span className="font-sans text-sm font-bold tracking-widest text-foreground drop-shadow">TARGET PROM</span>
+            <span className="font-sans text-xs font-semibold tracking-widest text-red-500 drop-shadow">GLOBAL</span>
+          </div>
         </button>
 
         <div className="hidden items-center gap-8 md:flex">
