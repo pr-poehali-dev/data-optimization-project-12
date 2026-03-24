@@ -19,11 +19,11 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
               }`}
             >
               <h2 className="mb-3 font-sans text-3xl font-light leading-[1.1] tracking-tight text-foreground md:mb-4 md:text-6xl lg:text-7xl">
-                Создаем
+                Надёжный
                 <br />
-                будущее
+                партнёр
                 <br />
-                <span className="text-foreground/40">цифровых</span>
+                <span className="text-foreground/40">в упаковке</span>
               </h2>
             </div>
 
@@ -34,10 +34,10 @@ export function AboutSection({ scrollToSection }: { scrollToSection?: (index: nu
               style={{ transitionDelay: "200ms" }}
             >
               <p className="max-w-md text-sm leading-relaxed text-foreground/90 md:text-lg">
-                Мы команда дизайнеров, разработчиков и технологов, которые создают исключительные цифровые продукты.
+                TARGET PROM GLOBAL — поставщик премиального упаковочного оборудования от ведущих производителей России, Турции и Китая.
               </p>
               <p className="max-w-md text-sm leading-relaxed text-foreground/90 md:text-lg">
-                Каждый проект — это возможность исследовать новые решения и раздвигать границы возможного.
+                Мы предлагаем полный цикл: от подбора оборудования и доставки до монтажа и сервисного сопровождения.
               </p>
             </div>
           </div>
