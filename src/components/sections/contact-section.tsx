@@ -3,31 +3,40 @@ import { useReveal } from "@/hooks/use-reveal"
 import { useState, type FormEvent } from "react"
 import { MagneticButton } from "@/components/magnetic-button"
 
+const API_URL = "https://functions.poehali.dev/81474b26-3fb1-4d11-baa6-606dd3e406f5"
+
 export function ContactSection() {
   const { ref, isVisible } = useReveal(0.3)
   const [formData, setFormData] = useState({ name: "", email: "", message: "" })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [submitError, setSubmitError] = useState("")
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    // Basic validation
-    if (!formData.name || !formData.email || !formData.message) {
-      return
-    }
+    if (!formData.name || !formData.email || !formData.message) return
 
     setIsSubmitting(true)
+    setSubmitError("")
 
-    // Simulate form submission (replace with actual API call later)
-    await new Promise((resolve) => setTimeout(resolve, 1500))
-
-    setIsSubmitting(false)
-    setSubmitSuccess(true)
-    setFormData({ name: "", email: "", message: "" })
-
-    // Reset success message after 5 seconds
-    setTimeout(() => setSubmitSuccess(false), 5000)
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      })
+      if (res.ok) {
+        setSubmitSuccess(true)
+        setFormData({ name: "", email: "", message: "" })
+        setTimeout(() => setSubmitSuccess(false), 6000)
+      } else {
+        setSubmitError("Ошибка отправки. Попробуйте позже.")
+      }
+    } catch {
+      setSubmitError("Ошибка соединения. Попробуйте позже.")
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -53,7 +62,7 @@ export function ContactSection() {
 
             <div className="space-y-4 md:space-y-8">
               <a
-                href="mailto:info@flowrise.dev"
+                href="mailto:info@tpglobal.ru"
                 className={`group block transition-all duration-700 ${
                   isVisible ? "translate-x-0 opacity-100" : "-translate-x-16 opacity-0"
                 }`}
@@ -64,7 +73,7 @@ export function ContactSection() {
                   <span className="font-mono text-xs text-foreground/60">Email</span>
                 </div>
                 <p className="text-base text-foreground transition-colors group-hover:text-foreground/70 md:text-2xl">
-                  info@flowrise.dev
+                  info@tpglobal.ru
                 </p>
               </a>
 
@@ -78,24 +87,7 @@ export function ContactSection() {
                   <MapPin className="h-3 w-3 text-foreground/60" />
                   <span className="font-mono text-xs text-foreground/60">Локация</span>
                 </div>
-                <p className="text-base text-foreground md:text-2xl">Москва, Россия</p>
-              </div>
-
-              <div
-                className={`flex gap-2 pt-2 transition-all duration-700 md:pt-4 ${
-                  isVisible ? "translate-x-0 opacity-100" : "-translate-x-8 opacity-0"
-                }`}
-                style={{ transitionDelay: "500ms" }}
-              >
-                {["Telegram", "VK", "LinkedIn", "GitHub"].map((social) => (
-                  <a
-                    key={social}
-                    href="#"
-                    className="border-b border-transparent font-mono text-xs text-foreground/60 transition-all hover:border-foreground/60 hover:text-foreground/90"
-                  >
-                    {social}
-                  </a>
-                ))}
+                <p className="text-base text-foreground md:text-2xl">Россия · Турция · Китай</p>
               </div>
             </div>
           </div>
@@ -168,7 +160,10 @@ export function ContactSection() {
                   {isSubmitting ? "Отправка..." : "Отправить"}
                 </MagneticButton>
                 {submitSuccess && (
-                  <p className="mt-3 text-center font-mono text-sm text-foreground/80">Сообщение отправлено!</p>
+                  <p className="mt-3 text-center font-mono text-sm text-green-400">✓ Заявка отправлена! Мы свяжемся с вами в ближайшее время.</p>
+                )}
+                {submitError && (
+                  <p className="mt-3 text-center font-mono text-sm text-red-400">{submitError}</p>
                 )}
               </div>
             </form>
